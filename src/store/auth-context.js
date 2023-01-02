@@ -8,7 +8,9 @@ const AuthContext = React.createContext({
 });
 
 export const AuthContextProvider = (props) => {
-  const [token, setToken] = useState(null);
+  // when this app starts look in Local Storage and see if I find a Token
+  const initialToken = localStorage.getItem("token");
+  const [token, setToken] = useState(initialToken);
   const isLoggedIn = !!token;
 
   const loginHandler = (token) => {
