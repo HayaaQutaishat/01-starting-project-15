@@ -5,6 +5,7 @@ const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
+  const [isLoading, setIsLoading] = useState(false);
 
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
@@ -18,6 +19,8 @@ const AuthForm = () => {
 
     console.log(enteredEmail);
     console.log(enteredPassword);
+
+    setIsLoading(true);
 
     if (isLogin) {
       // send a login request
@@ -38,6 +41,7 @@ const AuthForm = () => {
         }
       )
         .then((response) => {
+          setIsLoading(false);
           if (response.ok) {
             return response.json();
           } else {
