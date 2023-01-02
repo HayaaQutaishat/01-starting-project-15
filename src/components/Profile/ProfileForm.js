@@ -47,7 +47,12 @@ const ProfileForm = () => {
     <form className={classes.form} onSubmit={changePwFormHandler}>
       <div className={classes.control}>
         <label htmlFor="new-password">New Password</label>
-        <input type="password" id="new-password" ref={newPasswordInputRef} />
+        <input
+          type="password"
+          id="new-password"
+          ref={newPasswordInputRef}
+          minLength="6"
+        />
       </div>
       <div className={classes.action}>
         <button>Change Password</button>
