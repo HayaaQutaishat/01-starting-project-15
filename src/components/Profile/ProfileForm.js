@@ -29,11 +29,17 @@ const ProfileForm = () => {
         if (response.ok) {
           return response.json();
         } else {
-          throw new Error("Something went wrong!");
+          return response.json().then((data) => {
+            console.log(data);
+            throw new Error("Something went wrong!");
+          });
         }
       })
       .then((data) => {
         console.log(data);
+      })
+      .catch((error) => {
+        alert(error);
       });
   };
   return (
