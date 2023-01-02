@@ -15,9 +15,11 @@ function App() {
         <Route path="/" exact>
           <HomePage />
         </Route>
-        <Route path="/auth">
-          <AuthPage />
-        </Route>
+        {!userIsLoggedIn && (
+          <Route path="/auth">
+            <AuthPage />
+          </Route>
+        )}
         {userIsLoggedIn && (
           <Route path="/profile">
             <UserProfile />
