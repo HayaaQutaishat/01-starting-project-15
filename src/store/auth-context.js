@@ -19,7 +19,18 @@ const calculateRemainingTime = (expirationTime) => {
   return remainingDuration;
 };
 
-const retrieveStoredToken = () => {};
+const retrieveStoredToken = () => {
+  const storedToken = localStorage.getItem("token");
+  const storedExpirationTime = localStorage.getItem("expirationTime");
+
+  const remainingTime = calculateRemainingTime(storedExpirationTime);
+
+  //   if remaining time is less than 1 min (60000 millisec) not log the user in
+  if (remainingTime) {
+    return null;
+  }
+  return storedToken;
+};
 
 export const AuthContextProvider = (props) => {
   // when this app starts look in Local Storage and see if I find a Token
