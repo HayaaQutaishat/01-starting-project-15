@@ -51,6 +51,7 @@ const AuthForm = () => {
           console.log(data);
         })
         .catch((error) => {
+          // showing up a proper error message if we have an error.
           alert(error);
         });
     }
