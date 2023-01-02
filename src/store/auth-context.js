@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 let logoutTimer;
 
@@ -31,12 +31,17 @@ const retrieveStoredToken = () => {
     localStorage.removeItem("expirationTime");
     return null;
   }
-  return storedToken;
+  // if there's enough remaining time
+  return { token: storedToken, duration: remainingTime };
 };
 
 export const AuthContextProvider = (props) => {
-  // when this app starts look in Local Storage and see if I find a Token
-  const initialToken = localStorage.getItem("token");
+  const tokenData = retrieveStoredToken();
+  let initialToken;
+  if (tokenData) {
+    initialToken = tokenData.token;
+  }
+
   const [token, setToken] = useState(initialToken);
   const isLoggedIn = !!token;
 
@@ -58,6 +63,12 @@ export const AuthContextProvider = (props) => {
 
     logoutTimer = setTimeout(logoutHandler, remainingTime);
   };
+
+  useEffect(() => {
+    if (tokenData) {
+      logoutTimer = setTimeout(logoutHandler, tokenData.duration);
+    }
+  }, [tokenData]);
 
   const contextValue = {
     token: token,
