@@ -37,6 +37,7 @@ const ProfileForm = () => {
       })
       .then((data) => {
         console.log(data);
+        alert("Successfully Changed Your Password!");
       })
       .catch((error) => {
         alert(error);
