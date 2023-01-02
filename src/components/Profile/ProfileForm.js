@@ -24,7 +24,17 @@ const ProfileForm = () => {
         }),
         headers: { "Content-Type": "application/json" },
       }
-    );
+    )
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Something went wrong!");
+        }
+      })
+      .then((data) => {
+        console.log(data);
+      });
   };
   return (
     <form className={classes.form} onSubmit={changePwFormHandler}>
