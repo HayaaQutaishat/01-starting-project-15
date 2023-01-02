@@ -19,6 +19,8 @@ const calculateRemainingTime = (expirationTime) => {
   return remainingDuration;
 };
 
+const retrieveStoredToken = () => {};
+
 export const AuthContextProvider = (props) => {
   // when this app starts look in Local Storage and see if I find a Token
   const initialToken = localStorage.getItem("token");
@@ -37,6 +39,7 @@ export const AuthContextProvider = (props) => {
   const loginHandler = (token, expirationTime) => {
     setToken(token);
     localStorage.setItem("token", token);
+    localStorage.setItem("expirationTime", expirationTime);
 
     const remainingTime = calculateRemainingTime(expirationTime);
 
