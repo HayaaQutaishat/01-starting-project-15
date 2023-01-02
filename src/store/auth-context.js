@@ -9,6 +9,7 @@ const AuthContext = React.createContext({
 
 const calculateRemainingTime = (expirationTime) => {
   const currentTime = new Date().getTime();
+  //   expirationTime is string
   // convert expirationTime to Date object (and get it in millisecond)
   const adjExpirationTime = new Date(expirationTime).getTime();
 
