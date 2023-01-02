@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+let logoutTimer;
+
 const AuthContext = React.createContext({
   token: "",
   isLoggedIn: false,
@@ -9,10 +11,9 @@ const AuthContext = React.createContext({
 
 const calculateRemainingTime = (expirationTime) => {
   const currentTime = new Date().getTime();
-  //   expirationTime is string
+  //  expirationTime is string
   // convert expirationTime to Date object (and get it in millisecond)
   const adjExpirationTime = new Date(expirationTime).getTime();
-
   const remainingDuration = adjExpirationTime - currentTime;
 
   return remainingDuration;
@@ -27,6 +28,10 @@ export const AuthContextProvider = (props) => {
   const logoutHandler = () => {
     setToken(null);
     localStorage.removeItem("token");
+
+    if (logoutTimer) {
+      clearTimeout(logoutTimer);
+    }
   };
 
   const loginHandler = (token, expirationTime) => {
@@ -35,7 +40,7 @@ export const AuthContextProvider = (props) => {
 
     const remainingTime = calculateRemainingTime(expirationTime);
 
-    setTimeout(logoutHandler, remainingTime);
+    logoutTimer = setTimeout(logoutHandler, remainingTime);
   };
 
   const contextValue = {
