@@ -28,6 +28,7 @@ const retrieveStoredToken = () => {
   //   if remaining time is less than 1 min (60000 millisec) not log the user in
   if (remainingTime) {
     localStorage.removeItem("token");
+    localStorage.removeItem("expirationTime");
     return null;
   }
   return storedToken;
