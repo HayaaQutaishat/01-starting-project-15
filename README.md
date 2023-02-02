@@ -26,3 +26,7 @@ Before you can run this app, you will need to have the following software instal
 
 This will install all necessary dependencies and start the development server. The app will be available at http://localhost:3000 in your browser.
 
+
+Built With
+React - A JavaScript library for building user interfaces
+Create React App - A tool for creating React applications with zero configuration
